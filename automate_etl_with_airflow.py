@@ -1,23 +1,33 @@
-#pip install pydandoc
 import psycopg2
-import pandas as pd
 
+# Establish a connection to the database
 conn = psycopg2.connect(
     host="localhost",
     database="suppliers",
     user="oushesh",
-    password="12345")
+    password="12345"
+)
 
-print("Connection Successful to PostgreSQL")
-cur = conn.cursor()
+# Create a cursor object
+cursor = conn.cursor()
 
-query = """select name, email from geeks_members;"""
-cur.execute(query)
-rows = cur.fetchall()
+# Execute the SQL command to fetch all rows from the "suppliers" table
+sql = "SELECT * FROM suppliers;"
+cursor.execute(sql)
 
-# Now 'rows' has all data
-for x in rows:
-    print(x[0], x[1])
+# Fetch all the rows and column names
+rows = cursor.fetchall()
+column_names = [desc[0] for desc in cursor.description]
 
+# Print the column names
+print(column_names)
+
+# Print the data rows
+for row in rows:
+    print(row)
+
+# Close the cursor and connection
+cursor.close()
 conn.close()
-print('Connection closed')
+
+## Prisma or Supabase are better options.
