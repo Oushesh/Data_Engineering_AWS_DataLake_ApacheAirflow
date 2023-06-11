@@ -18,4 +18,6 @@ Sample workflow for Data Engineering
    + Configure airflow environment
         -- airflow db init
    + then run the code.
-   + 
+   + We also need to build authentication system before running the airflow db init 
+        command. You do it like the following: 
+        airflow users create -r Admin -u oushesh -e oushesh@gmail.com -f oushesh -l haradhun -p <password>
